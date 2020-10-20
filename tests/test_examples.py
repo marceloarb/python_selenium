@@ -28,20 +28,6 @@ def test_python_dot_org():
     elem.send_keys(Keys.RETURN)
     assert "No results found." not in visible_driver.page_source
     visible_driver.close()
-
-
-# def test_google_search_bar():
-#     driver.get("https://www.google.com/")
-#     assert "Google" in driver.title
-#     logger.info(f"the driver title is: {driver.title}")
-#     element = driver.find_element(By.NAME, value="q")
-#     element.clear()
-#     element.send_keys("dolar hoje real")
-#     element.send_keys(Keys.RETURN)
-#     assert "Brazilian Real" in driver.page_source
-#     logger.info(f"the driver title after search is: {driver.title}")
-#     driver.close()
-    
     
 def test_google_united():
     visible_driver.get("https://www.google.com/")
@@ -57,6 +43,13 @@ def test_google_united():
         united = class_name.find_element(By.TAG_NAME, value="a")
         united.click()
         test_united_input()
+        visible_driver.implicitly_wait(10)
+        prices = visible_driver.find_elements(By.CSS_SELECTOR, value="price-point price-point-revised use-roundtrippricing")
+        logger.info(f"Prices:{prices}")
+        for x in prices:
+            print(x)
+        visible_driver.save_screenshot("Hello.png")
+
     finally:
         visible_driver.close()
 
@@ -82,56 +75,7 @@ def test_united_input():
     return_date.send_keys(Keys.ESCAPE)
     button = visible_driver.find_element(By.CSS_SELECTOR, value="#bookFlightForm > div.app-components-BookFlightForm-bookFlightForm__basicEconomyToggle--1VE5O > div > div:nth-child(1) > div > div > button")
     button.click()
-    visible_driver.save_screenshot("Hello.png")
-
-
-
-
-# def test_united_airline_homepage():
-#     driver.get("https://www.united.com/en/us")
-#     assert "United" in driver.title
-#     logger.info(f"the driver title is: {driver.title}")
-#     element_from = driver.find_element(By.ID, value="bookFlightOriginInput")
-#     element_from.clear()
-#     element_from.send_keys("Dallas DFW ")
-#     driver.implicitly_wait(1)
-#     element_to = driver.find_element(By.ID, value="bookFlightDestinationInput")
-#     element_to.clear()
-#     element_to.send_keys("São Paulo SAO")
-#     driver.implicitly_wait(10)
-#     element_depart_date = driver.find_element(By.ID, value=("DepartDate"))
-#     element_depart_date.send_keys("Oct 30")
-#     driver.implicitly_wait(1)
-#     element_return_date = driver.find_element(By.ID, value=("ReturnDate"))
-#     element_return_date.send_keys("Nov 21")
-#     driver.implicitly_wait(10)
-#     submit =  driver.find_element(By.XPATH, value="//*[@id='bookFlightForm']/div[4]/div/div[1]/div/div/button")
-#     action = ActionChains(driver) 
-#     action.click(on_element = submit)
-#     assert "No results found." not in driver.page_source
-#     driver.close()
-
-# def test_united_airline_homepage1():
-#     driver.get("https://www.united.com/en/us")
-#     assert "United" in driver.title
-#     logger.info(f"the driver title is: {driver.title}")
-#     element_from = driver.find_element(By.ID, value="bookFlightOriginInput")
-#     element_from.clear()
-#     element_from.send_keys("Dallas DFW ")
-#     element_from.send_keys(Keys.TAB)
-#     element_from.send_keys("São Paulo SAO")
-#     element_from.send_keys(Keys.TAB)
-#     element_from.send_keys(Keys.TAB)
-#     element_from.send_keys("Oct 30")
-#     element_from.send_keys("Nov 21")
-#     driver.implicitly_wait(10)
-#     submit =  driver.find_element(By.XPATH, value="//*[@id='bookFlightForm']/div[4]/div/div[1]/div/div/button")
-#     action = ActionChains(driver) 
-#     action.click(on_element = submit)
-#     assert "No results found." not in driver.page_source
-#     driver.close()
-
-
+    
 
    
     
